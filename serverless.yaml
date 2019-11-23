@@ -1,0 +1,16 @@
+service: knative-demo
+description: "Deploying functions from GitLab using Knative"
+
+provider:
+  name: triggermesh
+  environment:
+    FOO: BAR
+
+functions:
+  python:
+    source: python/handler.py
+    description: "python Lambda compatible"
+    runtime: https://raw.githubusercontent.com/triggermesh/runtime-build-tasks/master/aws-lambda/python37-runtime.yaml 
+    buildargs:
+      - DIRECTORY=python
+      - HANDLER=handler.endpoint
